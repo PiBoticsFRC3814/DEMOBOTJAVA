@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,4 +18,12 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
   public Joystick driverJoy = new Joystick(RobotMap.oi_driver);
+
+  public Button Fire = new JoystickButton(driverJoy, 1);
+  public Button Arm = new JoystickButton(driverJoy, 1);
+
+  public OI(){
+    Fire.whenPressed(new FireTheCannon());
+    Arm.whenPressed(new ToggleArm());
+  }
 }

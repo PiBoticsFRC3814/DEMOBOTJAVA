@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -25,6 +26,9 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static DriveTrain m_DriveTrain;
+  public static Cannon m_Cannon;
+
+  public static Compressor comp;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -36,8 +40,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    m_DriveTrain = new DriveTrain();   
+    m_DriveTrain = new DriveTrain();
+    m_Cannon = new Cannon();
+    comp = new Compressor(0);
     // chooser.addOption("My Auto", new MyAutoCommand());
+
+    comp.setClosedLoopControl(true);
   }
 
   /**

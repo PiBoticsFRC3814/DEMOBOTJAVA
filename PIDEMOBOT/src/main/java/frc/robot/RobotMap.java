@@ -14,10 +14,15 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
+  //Drive train talons
   public static final int drive_lf = 10;
   public static final int drive_lr = 11;
   public static final int drive_rf = 12;
   public static final int drive_rr = 13;
-
+  //control system
   public static final int oi_driver = 0;
+  //pneumatics
+  public static final int cannon_piston1 = 0;
+  public static final int cannon_piston2 = 1;
+  public static final int cannon_wheels = 20;
 }
