@@ -20,10 +20,13 @@ public class OI {
   public Joystick driverJoy = new Joystick(RobotMap.oi_driver);
 
   public Button Fire = new JoystickButton(driverJoy, 1);
-  public Button Arm = new JoystickButton(driverJoy, 1);
+  public Button Arm = new JoystickButton(driverJoy, 2);
+  public Button All = new JoystickButton(driverJoy, 3);
 
   public OI(){
-    Fire.whenPressed(new FireTheCannon());
+    Fire.whenPressed(new FireCannon());
+    Fire.whenReleased(new UnFireCannon());
+    All.whenPressed(new FireAll());
     Arm.whenPressed(new ToggleArm());
   }
 }

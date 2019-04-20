@@ -7,12 +7,18 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;;
 
 public class FireCannon extends Command {
+
+  public static Timer timeFire;
+
   public FireCannon() {
     requires(Robot.m_Cannon);
+    timeFire = new Timer();
+    timeFire.reset();
   }
 
   // Called just before this Command runs the first time
@@ -24,12 +30,21 @@ public class FireCannon extends Command {
   @Override
   protected void execute() {
     Robot.m_Cannon.fire();
+    timeFire.start();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if (timeFire.get() > 5.0)
+    {
+      timeFire.reset();
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 
   // Called once after isFinished returns true

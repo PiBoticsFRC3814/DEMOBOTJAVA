@@ -15,6 +15,8 @@ import frc.robot.commands.DriveJoy;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.kauailabs.navx.frc.AHRS;
+import com.analog.adis16448.frc.*;
+
 
 /**
  * Add your docs here.
@@ -28,7 +30,7 @@ public class DriveTrain extends Subsystem {
 
   MecanumDrive piboticsDrive;
 
-  AHRS gyro;
+  ADIS16448_IMU gyro;
 
   public DriveTrain(){
     lf = new WPI_TalonSRX(RobotMap.drive_lf);
@@ -38,15 +40,47 @@ public class DriveTrain extends Subsystem {
 
     piboticsDrive = new MecanumDrive(lf, lr, rf, rr);
 
-    gyro = new AHRS(Port.kMXP);
+    gyro = new ADIS16448_IMU();
+
+    lf.setInverted(true);
+    lr.setInverted(true);
+
   }
   
-  public void mecanumDrive(double x, double y, double z, double gyro){
-    piboticsDrive.driveCartesian(y, x, z, gyro);
+  public void mecanumDrive(double y, double x, double z, double gyro){
+    piboticsDrive.driveCartesian(x, y, z, gyro);
   }
 
   public double getAngle(){
-    return gyro.getYaw();
+    return gyro.getAngleZ();
+  }
+
+  public void gyroCalibrate(){
+    gyro.calibrate();
+  }
+
+  public void gyroReset(){
+    gyro.reset();
+  }
+
+  public Boolean getGyroStatus(){
+    return false;
+  }
+
+  public boolean getLFDirection(){
+    return lf.getInverted();
+  }
+
+  public boolean getLRDirection(){
+    return lr.getInverted();
+  }
+
+  public boolean getRFDirection(){
+    return rf.getInverted();
+  }
+
+  public boolean getRRDirection(){
+    return rr.getInverted();
   }
 
   @Override

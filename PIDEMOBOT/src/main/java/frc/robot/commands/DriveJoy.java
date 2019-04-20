@@ -8,7 +8,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class DriveJoy extends Command {
   public DriveJoy() {
@@ -25,13 +27,74 @@ public class DriveJoy extends Command {
   protected void execute() {
     double x, y, z, gyro;
 
-    x = Robot.m_oi.driverJoy.getX();
+    
     y = Robot.m_oi.driverJoy.getY();
     z = Robot.m_oi.driverJoy.getZ();
 
+    if (Robot.m_oi.driverJoy.getX() > RobotMap.deadzoneX || Robot.m_oi.driverJoy.getX() < RobotMap.deadzoneX)
+    {
+      x = -Robot.m_oi.driverJoy.getX(); 
+
+      if (x < 0.0)
+      {
+        x = x + RobotMap.deadzoneX;
+      }
+      if (x > 0.0)
+      {
+        x = x - RobotMap.deadzoneX;
+      }
+
+    }
+    else x = 0.0;
+    
+    if (Robot.m_oi.driverJoy.getY() > RobotMap.deadzoneY || Robot.m_oi.driverJoy.getY() < RobotMap.deadzoneY)
+    {
+      y = Robot.m_oi.driverJoy.getY(); 
+
+      if (y < 0.0)
+      {
+        y = y + RobotMap.deadzoneY;
+      }
+      if (y > 0.0)
+      {
+        y = y - RobotMap.deadzoneY;
+      }
+
+    }
+    else y = 0.0;
+
+    if (Robot.m_oi.driverJoy.getZ() > RobotMap.deadzoneZ || Robot.m_oi.driverJoy.getZ() < RobotMap.deadzoneZ)
+    {
+      z = -Robot.m_oi.driverJoy.getZ(); 
+
+      if (z < 0.0)
+      {
+        z = z + RobotMap.deadzoneZ;
+      }
+      if (z > 0.0)
+      {
+        z = z - RobotMap.deadzoneZ;
+      }
+
+    }
+    else z = 0.0;
+    
+    if (Robot.m_oi.driverJoy.getRawButton(8))
+    {
+      x = x/2.0;
+      y = y/2.0;
+      z = z/2.0;
+    }
+
+    if (Robot.m_oi.driverJoy.getRawButton(5))
+    {
+      Robot.m_DriveTrain.gyroReset();
+    }
+
     gyro = Robot.m_DriveTrain.getAngle();
 
-    Robot.m_DriveTrain.mecanumDrive(x, y, z, gyro);
+    Robot.m_DriveTrain.mecanumDrive(y, x, z, -gyro);
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

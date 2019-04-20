@@ -9,12 +9,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class FireTheCannon extends CommandGroup {
+public class FireAll extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public FireTheCannon() {
+  public FireAll() {
+    addSequential(new ToggleArm());
     addSequential(new FireCannon());
     addSequential(new UnFireCannon());
+    addSequential(new ToggleArm());
   }
 }

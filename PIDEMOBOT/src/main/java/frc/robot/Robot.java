@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
 
@@ -24,10 +25,9 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static OI m_oi;
   public static DriveTrain m_DriveTrain;
   public static Cannon m_Cannon;
-
+  public static OI m_oi;
   public static Compressor comp;
 
   Command m_autonomousCommand;
@@ -39,13 +39,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
     m_DriveTrain = new DriveTrain();
     m_Cannon = new Cannon();
     comp = new Compressor(0);
+    m_oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
 
     comp.setClosedLoopControl(true);
+    Robot.m_DriveTrain.gyroCalibrate();
   }
 
   /**
@@ -88,6 +89,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_chooser.getSelected();
+    Robot.m_DriveTrain.gyroReset();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -120,6 +122,8 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
+    Robot.m_DriveTrain.gyroReset();
+
     SmartDashboard.putNumber("Gyro Angle", Robot.m_DriveTrain.getAngle());
   }
 
@@ -129,6 +133,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    SmartDashboard.putNumber("Gyro Angle", Robot.m_DriveTrain.getAngle());
+    SmartDashboard.putNumber("Z", Robot.m_oi.driverJoy.getZ());
+    SmartDashboard.putNumber("Y", Robot.m_oi.driverJoy.getY());
+    SmartDashboard.putNumber("X", Robot.m_oi.driverJoy.getX());
+    SmartDashboard.putNumber("TimerFire", FireCannon.timeFire.get());
+    SmartDashboard.putNumber("TimerArm", ToggleArm.time.get());
   }
 
   /**
