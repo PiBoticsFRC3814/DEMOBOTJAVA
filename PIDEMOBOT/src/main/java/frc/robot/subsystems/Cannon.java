@@ -29,6 +29,7 @@ public class Cannon extends Subsystem {
   public Cannon() {
     piston = new DoubleSolenoid(RobotMap.cannon_piston1, RobotMap.cannon_piston2);
     wheels = new WPI_TalonSRX(RobotMap.cannon_wheels);
+    
 
   }
 

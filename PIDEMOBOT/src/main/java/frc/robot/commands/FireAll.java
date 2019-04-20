@@ -7,16 +7,18 @@
 
 package frc.robot.commands;
 
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class FireAll extends CommandGroup {
   /**
    * Add your docs here.
    */
+
   public FireAll() {
-    addSequential(new ToggleArm());
-    addSequential(new FireCannon());
+    addSequential(new StartWheels(0.5));
+    addSequential(new TimedFireCannon(0.2));
     addSequential(new UnFireCannon());
-    addSequential(new ToggleArm());
+    addSequential(new StopWheels());
   }
 }

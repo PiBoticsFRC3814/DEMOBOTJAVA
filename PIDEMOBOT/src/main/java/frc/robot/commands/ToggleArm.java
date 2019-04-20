@@ -12,12 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ToggleArm extends Command {
-  public static Timer time;
 
   public ToggleArm() {
     requires(Robot.m_Cannon);
-    time = new Timer();
-    time.reset();
   }
 
   // Called just before this Command runs the first time
@@ -29,29 +26,18 @@ public class ToggleArm extends Command {
   @Override
   protected void execute() {
 
-    time.start();
-
     if (!Robot.m_Cannon.isArmed){
       Robot.m_Cannon.wheelsOn();
     }
     else{
       Robot.m_Cannon.wheelsOff();
-
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    if (time.get() > 5.0)
-    {
-      time.reset();
+  protected boolean isFinished() { 
       return true;
-    }
-    else
-    {
-      return false;
-    }
   }
 
   // Called once after isFinished returns true

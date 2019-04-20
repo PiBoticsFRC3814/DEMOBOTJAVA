@@ -137,8 +137,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Z", Robot.m_oi.driverJoy.getZ());
     SmartDashboard.putNumber("Y", Robot.m_oi.driverJoy.getY());
     SmartDashboard.putNumber("X", Robot.m_oi.driverJoy.getX());
-    SmartDashboard.putNumber("TimerFire", FireCannon.timeFire.get());
-    SmartDashboard.putNumber("TimerArm", ToggleArm.time.get());
   }
 
   /**
