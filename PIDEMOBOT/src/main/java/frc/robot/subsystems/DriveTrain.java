@@ -7,14 +7,12 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveJoy;
 
 import com.ctre.phoenix.motorcontrol.can.*;
-import com.kauailabs.navx.frc.AHRS;
 import com.analog.adis16448.frc.*;
 
 
