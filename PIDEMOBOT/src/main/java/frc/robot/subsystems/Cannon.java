@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.*;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -27,7 +27,7 @@ public class Cannon extends Subsystem {
   public boolean isArmed = false;
 
   public Cannon() {
-    piston = new DoubleSolenoid(RobotMap.cannon_piston1, RobotMap.cannon_piston2);
+    piston = new DoubleSolenoid(1, RobotMap.cannon_piston1, RobotMap.cannon_piston2);
     wheels = new WPI_TalonSRX(RobotMap.cannon_wheels);
     
 

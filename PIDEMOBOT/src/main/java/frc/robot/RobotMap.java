@@ -15,10 +15,10 @@ package frc.robot;
  */
 public class RobotMap {
   //Drive train talons
-  public static final int drive_lf = 1;
-  public static final int drive_lr = 2;
-  public static final int drive_rf = 3;
-  public static final int drive_rr = 4;
+  public static final int drive_lf = 10;
+  public static final int drive_lr = 13;
+  public static final int drive_rf = 12;
+  public static final int drive_rr = 11;
   //control system
   public static final int oi_driver = 0;
   //pneumatics
@@ -26,8 +26,8 @@ public class RobotMap {
   public static final int cannon_piston2 = 1;
   public static final int cannon_wheels = 20;
 
-  public static final double deadzoneX = 0.05;
-  public static final double deadzoneY = 0.05;
-  public static final double deadzoneZ = 0.05;
+  public static final double deadzoneX = 0.1;
+  public static final double deadzoneY = 0.1;
+  public static final double deadzoneZ = 0.1;
 
 }

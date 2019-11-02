@@ -22,11 +22,15 @@ public class OI {
   public Button Fire = new JoystickButton(driverJoy, 3);
   public Button Arm = new JoystickButton(driverJoy, 2);
   public Button All = new JoystickButton(driverJoy, 1);
+  public Button Hone = new JoystickButton(driverJoy, 8);
 
   public OI(){
     //Fire.whenPressed(new FireCannon());
     //Fire.whenReleased(new UnFireCannon());
     All.whenPressed(new FireAll());
+    Hone.whenPressed(new DriveLimelight());
+    Hone.whenReleased(new DriveJoy());
+    Hone.whenReleased(new GetLimelight());
     //Arm.whenPressed(new ToggleArm());
   }
 }

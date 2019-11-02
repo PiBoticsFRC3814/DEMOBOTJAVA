@@ -15,16 +15,15 @@ import frc.robot.commands.DriveJoy;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.analog.adis16448.frc.*;
 
-
 /**
  * Add your docs here.
  */
 public class DriveTrain extends Subsystem {
   
   WPI_TalonSRX lf;
-  WPI_TalonSRX lr;
+  WPI_VictorSPX lr;
   WPI_TalonSRX rf;
-  WPI_TalonSRX rr;
+  WPI_VictorSPX rr;
 
   MecanumDrive piboticsDrive;
 
@@ -32,21 +31,21 @@ public class DriveTrain extends Subsystem {
 
   public DriveTrain(){
     lf = new WPI_TalonSRX(RobotMap.drive_lf);
-    lr = new WPI_TalonSRX(RobotMap.drive_lr);
+    lr = new WPI_VictorSPX(RobotMap.drive_lr);
     rf = new WPI_TalonSRX(RobotMap.drive_rf);
-    rr = new WPI_TalonSRX(RobotMap.drive_rr);
-
+    rr = new WPI_VictorSPX(RobotMap.drive_rr);
+    lf.setInverted(false);
+    lr.setInverted(false);
+    rf.setInverted(false);
+    rr.setInverted(false);
     piboticsDrive = new MecanumDrive(lf, lr, rf, rr);
 
     gyro = new ADIS16448_IMU();
 
-    lf.setInverted(true);
-    lr.setInverted(true);
-
   }
   
   public void mecanumDrive(double y, double x, double z, double gyro){
-    piboticsDrive.driveCartesian(x, y, z, gyro);
+    piboticsDrive.driveCartesian(x, -y, z, -gyro);
   }
 
   public double getAngle(){

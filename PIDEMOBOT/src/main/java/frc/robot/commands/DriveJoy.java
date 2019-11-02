@@ -26,13 +26,9 @@ public class DriveJoy extends Command {
   protected void execute() {
     double x, y, z, gyro;
 
-    
-    y = Robot.m_oi.driverJoy.getY();
-    z = Robot.m_oi.driverJoy.getZ();
-
     if (Robot.m_oi.driverJoy.getX() > RobotMap.deadzoneX || Robot.m_oi.driverJoy.getX() < RobotMap.deadzoneX)
     {
-      x = -Robot.m_oi.driverJoy.getX(); 
+      x = Robot.m_oi.driverJoy.getX(); 
 
       if (x < 0.0)
       {
@@ -64,7 +60,7 @@ public class DriveJoy extends Command {
 
     if (Robot.m_oi.driverJoy.getZ() > RobotMap.deadzoneZ || Robot.m_oi.driverJoy.getZ() < RobotMap.deadzoneZ)
     {
-      z = -Robot.m_oi.driverJoy.getZ(); 
+      z = Robot.m_oi.driverJoy.getZ(); 
 
       if (z < 0.0)
       {
@@ -92,7 +88,7 @@ public class DriveJoy extends Command {
 
     gyro = Robot.m_DriveTrain.getAngle();
 
-    Robot.m_DriveTrain.mecanumDrive(y, x, z, -gyro);
+    Robot.m_DriveTrain.mecanumDrive(y, x, z, gyro);
 
   }
 
@@ -111,5 +107,6 @@ public class DriveJoy extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.m_DriveTrain.mecanumDrive(0, 0, 0, 0);
   }
 }
